@@ -163,14 +163,14 @@ Ext.onReady(function() {
   function handleZipChange(field, value) {
     if (!value || value.length==0) return;
 
-    $.ajax({
+    sforce.connection.remoteFunction({
       url : 'http://zip.ricollab.jp/search?q='+encodeURIComponent(value)+'&format=json',
-      dataType : 'jsonp',
       success : onSuccess,
       error : onFailure
     });
 
     function onSuccess(res) {
+      res = JSON.parse(res);
       var result = res.result;
       if (result && result.length>0) {
         $.ajax({
