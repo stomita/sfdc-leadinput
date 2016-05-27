@@ -173,16 +173,16 @@ Ext.onReady(function() {
       res = JSON.parse(res);
       var result = res.result;
       if (result && result.length>0) {
-        $.ajax({
+        sforce.connection.remoteFunction({
           url : result[0].link+'.json',
-          dataType: 'jsonp',
-          success : function(result) {
+          onSuccess : function(result) {
+            result = JSON.parse(result);
             inputForm.getComponent('PostalCode').setValue(result.zipcode.substring(0,3)+'-'+result.zipcode.substring(3));
             inputForm.getComponent('State').setValue(result.address.prefecture);
             inputForm.getComponent('City').setValue(result.address.city);
             inputForm.getComponent('Street').setValue(result.address.town);
           },
-          error : onFailure
+          onFailure : onFailure
         });
       }
     }
