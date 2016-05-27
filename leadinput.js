@@ -165,8 +165,8 @@ Ext.onReady(function() {
 
     sforce.connection.remoteFunction({
       url : 'http://zip.ricollab.jp/search?q='+encodeURIComponent(value)+'&format=json',
-      success : onSuccess,
-      error : onFailure
+      onSuccess : onSuccess,
+      onFailure : onFailure
     });
 
     function onSuccess(res) {
